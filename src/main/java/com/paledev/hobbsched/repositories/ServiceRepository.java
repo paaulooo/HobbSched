@@ -1,10 +1,10 @@
 package com.paledev.hobbsched.repositories;
 
-import com.paledev.hobbsched.models.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Long> {
+public interface ServiceRepository extends JpaRepository<Service,Long> {
 
 }
