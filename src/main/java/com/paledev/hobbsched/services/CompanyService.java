@@ -39,6 +39,7 @@ public class CompanyService {
     public void delete(Long id) {
         Company company = companyRepository.findById(id).orElseThrow(()
                 -> new RuntimeException("Company not found with id " + id));
+        companyRepository.delete(company);
     }
 
     public List<Company> findAllCompanies() {
