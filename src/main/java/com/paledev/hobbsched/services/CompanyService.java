@@ -30,7 +30,7 @@ public class CompanyService {
         return companyRepository.save(company);
     }
 
-    public Company update(Long id,CompanyDTO dto) {
+    public Company update(Long id, CompanyDTO dto) {
         Company company = companyRepository.findById(id).orElseThrow(()
                 -> new RuntimeException("Company not found with id " + id));
         setCompanyValues(company, dto);
