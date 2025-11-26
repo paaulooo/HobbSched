@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 public class ScheduleDTO {
     private LocalDateTime dateTime;
-    private Client client;
+    private Long clientId;
     private Service service;
-    private Company company;
+    private Long companyId;
 }

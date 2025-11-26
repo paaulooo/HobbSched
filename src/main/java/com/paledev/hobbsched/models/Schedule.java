@@ -27,18 +27,15 @@ public class Schedule {
     @Column(name="date")
     private LocalDateTime scheduleDateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
     @JoinColumn(name = "client_id")
-    private Client client;
+    private Long client;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id")
     private Service service;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
-    private Company company;
-
-
+    private Long company;
 
 }

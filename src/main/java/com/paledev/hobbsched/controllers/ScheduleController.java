@@ -13,35 +13,35 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/{company}/sched")
+@RequestMapping("/{companyId}/sched")
 public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @GetMapping
-    public ResponseEntity<?> getSchedules(@PathVariable Company company) {
-        List<Schedule> schedules = scheduleService.findAllSchedulesByCompany(company);
+    public ResponseEntity<?> getSchedules(@PathVariable Long companyId) {
+        List<Schedule> schedules = scheduleService.findAllSchedulesByCompany(companyId);
         return ResponseEntity.ok(schedules);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Schedule>> getSchedule(@PathVariable Company company, @PathVariable Long id) {
-        return ResponseEntity.ok(scheduleService.findScheduleByIdAndCompany(id, company));
+    public ResponseEntity<Optional<Schedule>> getSchedule(@PathVariable Long companyId, @PathVariable Long id) {
+        return ResponseEntity.ok(scheduleService.findScheduleByIdAndCompany(id, companyId));
     }
 
     @PostMapping
-    public ResponseEntity<Schedule> createSchedule(@PathVariable Company company, @RequestBody ScheduleDTO schedule) {
+    public ResponseEntity<Schedule> createSchedule(@PathVariable Long companyId, @RequestBody ScheduleDTO schedule) {
         return ResponseEntity.ok(scheduleService.save(schedule));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Schedule> updateSchedule(@PathVariable Company company, @PathVariable Long id,
+    public ResponseEntity<Schedule> updateSchedule(@PathVariable Long companyId, @PathVariable Long id,
                                                    @RequestBody ScheduleDTO schedule) {
-        return ResponseEntity.ok(scheduleService.update(id, company, schedule));
+        return ResponseEntity.ok(scheduleService.update(id, companyId, schedule));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Schedule> deleteSchedule(@PathVariable Company company, @PathVariable Long id) {
-        scheduleService.delete(id, company);
+    public ResponseEntity<Schedule> deleteSchedule(@PathVariable Long companyId, @PathVariable Long id) {
+        scheduleService.delete(id, companyId);
         return ResponseEntity.ok().build();
     }
 }

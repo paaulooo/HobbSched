@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    Optional<Schedule> findByScheduleIdAndCompany(Long scheduleId, Company company);
+    Optional<Schedule> findByScheduleIdAndCompany(Long scheduleId, Long companyId);
 
-    List<Schedule> findAllByCompany(Company company);
+    List<Schedule> findAllByCompany(Long companyId);
 }

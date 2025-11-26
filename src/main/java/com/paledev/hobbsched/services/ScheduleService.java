@@ -1,7 +1,6 @@
 package com.paledev.hobbsched.services;
 
 import com.paledev.hobbsched.dto.ScheduleDTO;
-import com.paledev.hobbsched.models.Company;
 import com.paledev.hobbsched.models.Schedule;
 import com.paledev.hobbsched.repositories.ScheduleRepository;
 import jakarta.transaction.Transactional;
@@ -22,9 +21,9 @@ public class ScheduleService {
 
     private void setScheduleValues(Schedule schedule, ScheduleDTO dto) {
         schedule.setScheduleDateTime(dto.getDateTime());
-        schedule.setClient(dto.getClient());
+        schedule.setClient(dto.getClientId());
         schedule.setService(dto.getService());
-        schedule.setCompany(dto.getCompany());
+        schedule.setCompany(dto.getCompanyId());
     }
 
     public Schedule save(ScheduleDTO dto){
@@ -32,22 +31,22 @@ public class ScheduleService {
         setScheduleValues(schedule, dto);
         return  scheduleRepository.save(schedule);
     }
-    public Schedule update(Long id, Company company ,ScheduleDTO dto){
+    public Schedule update(Long id, Long company , ScheduleDTO dto){
         Schedule schedule = findScheduleByIdAndCompany(id, company).orElseThrow(()
         -> new RuntimeException("Schedule Not Found!"));
         return  scheduleRepository.save(schedule);
     }
-    public void delete(Long id, Company company){
+    public void delete(Long id, Long company){
         Schedule schedule = findScheduleByIdAndCompany(id, company).orElseThrow(()
         -> new RuntimeException("Schedule Not Found!"));
         scheduleRepository.delete(schedule);
     }
 
-    public List<Schedule> findAllSchedulesByCompany(Company company){
+    public List<Schedule> findAllSchedulesByCompany(Long company){
         return scheduleRepository.findAllByCompany(company);
     }
 
-    public Optional<Schedule> findScheduleByIdAndCompany(Long id, Company company){
+    public Optional<Schedule> findScheduleByIdAndCompany(Long id, Long company){
         return scheduleRepository.findByScheduleIdAndCompany(id, company);
     }
 
